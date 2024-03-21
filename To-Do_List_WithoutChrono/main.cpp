@@ -5,7 +5,6 @@
 
 void get_task_data(std::string& task_name, unsigned char& task_priority, std::string& periodic_type);
 void get_task_data(std::string& task_name, unsigned char& task_priority, std::string& periodic_type, std::string& starting);
-tm get_specific_date(void);
 
 int main(void)
 {

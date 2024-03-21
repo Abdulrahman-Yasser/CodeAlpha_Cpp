@@ -3,6 +3,7 @@
 #include <cstring>
 #include <iostream>
 #include <type_traits>
+
 namespace CHRONO_WR_NS
 {
     Chrono_Wrapper::Chrono_Wrapper(std::chrono::time_point<std::chrono::system_clock> tp) : main_time_point(tp)
@@ -47,8 +48,12 @@ namespace CHRONO_WR_NS
         return main_time_point;
     }
 
-    std::chrono::minutes subtract_two_tp(std::chrono::time_point<std::chrono::system_clock> tp_1,
-                                                                std::chrono::time_point<std::chrono::system_clock> tp_2)
+
+
+
+
+        std::chrono::minutes Chrono_Wrapper::subtract_two_tp(   std::chrono::time_point<std::chrono::system_clock> tp_1, 
+                                    std::chrono::time_point<std::chrono::system_clock> tp_2)
     {
         std::chrono::minutes temp = std::chrono::duration_cast<std::chrono::minutes>(tp_1 - tp_2);
         if (temp <= (std::chrono::minutes)0)
@@ -61,8 +66,8 @@ namespace CHRONO_WR_NS
         }
     }
 
-    std::chrono::minutes subtract_two_tp(std::chrono::time_point<std::chrono::system_clock> tp_1,
-                                                                Chrono_Wrapper tp_2)
+        std::chrono::minutes Chrono_Wrapper::subtract_two_tp(   std::chrono::time_point<std::chrono::system_clock> tp_1, 
+                                    Chrono_Wrapper tp_2)
     {
         std::chrono::minutes temp = std::chrono::duration_cast<std::chrono::minutes>(tp_1 - tp_2.read_tp());
         if (temp <= (std::chrono::minutes)0)
@@ -75,8 +80,8 @@ namespace CHRONO_WR_NS
         }
     }
 
-    std::chrono::minutes subtract_two_tp(Chrono_Wrapper tp_1,
-                                                                std::chrono::time_point<std::chrono::system_clock> tp_2)
+        std::chrono::minutes Chrono_Wrapper::subtract_two_tp(   Chrono_Wrapper tp_1, 
+                                    std::chrono::time_point<std::chrono::system_clock> tp_2)
     {
         std::chrono::minutes temp = std::chrono::duration_cast<std::chrono::minutes>(tp_1.read_tp() - tp_2);
         if (temp <= (std::chrono::minutes)0)
@@ -89,7 +94,7 @@ namespace CHRONO_WR_NS
         }
     }
 
-    std::chrono::minutes subtract_two_tp(Chrono_Wrapper tp_1,
+        std::chrono::minutes Chrono_Wrapper::subtract_two_tp(Chrono_Wrapper tp_1,
                                                                 Chrono_Wrapper tp_2)
     {
         std::chrono::minutes temp = std::chrono::duration_cast<std::chrono::minutes>(tp_1.read_tp() - tp_2.read_tp());
@@ -104,7 +109,7 @@ namespace CHRONO_WR_NS
     }
 
     template <typename T>
-    Chrono_Wrapper add_tp_with_dur(
+    Chrono_Wrapper Chrono_Wrapper::add_tp_with_dur(
         std::chrono::time_point<std::chrono::system_clock> tp_1,
         T dur)
     {

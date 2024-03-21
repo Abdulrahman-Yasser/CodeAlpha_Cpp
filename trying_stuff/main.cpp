@@ -31,12 +31,19 @@ void change_unit(unsigned char value, std::chrono::time_point<std::chrono::syste
 //     S::cout << "millisecond = " << time.subseconds().count() << "ms\n";
 // }
 
+std::chrono::minutes sub(std::chrono::time_point<std::chrono::system_clock> a1, std::chrono::time_point<std::chrono::system_clock> a2){
+        std::chrono::minutes temp = std::chrono::duration_cast<std::chrono::minutes>(a1 - a2);
+        return temp;
+}
+
 int main()
 {
     using namespace std::literals;
     std::chrono::time_point<std::chrono::system_clock> first_time = std::chrono::system_clock::now();
-
-    first_time = std::chrono::floor<std::chrono::duration<int, std::ratio<31556952>>>(first_time);
+    std::chrono::time_point<std::chrono::system_clock> sec_time = std::chrono::system_clock::now();
+    std::chrono::minutes temp = sub(first_time, sec_time);
+    std::cout << temp.count();
+    // first_time = std::chrono::floor<std::chrono::duration<int, std::ratio<31556952>>>(first_time);
 
 
     // const std::time_t t_c = std::chrono::system_clock::to_time_t(first_time + 7h);
@@ -48,15 +55,15 @@ int main()
     // change_unit(2, first_time, 6);
     // std::cout << "in minutes, the time was "
     //           << std::put_time(std::localtime(&t_c), "%F %T.\n") << std::endl;
-    const std::time_t t_c = std::chrono::system_clock::to_time_t(first_time);
+    // const std::time_t t_c = std::chrono::system_clock::to_time_t(first_time);
     // std::cout << "in years, the time was "
     //         << std::put_time(std::localtime(&t_c), "%F %T.\n") << std::endl;
 
-    auto q = std::localtime(&t_c);
-    std::cout << q->tm_year << std::endl;
-    std::cout << q->tm_mday << std::endl;
-    std::cout << q->tm_mon << std::endl;
-    std::cout << q->tm_hour << std::endl;
+    // auto q = std::localtime(&t_c);
+    // std::cout << q->tm_year << std::endl;
+    // std::cout << q->tm_mday << std::endl;
+    // std::cout << q->tm_mon << std::endl;
+    // std::cout << q->tm_hour << std::endl;
 }
 
 void change_unit(unsigned char value, std::chrono::time_point<std::chrono::system_clock> &the_time, int type)

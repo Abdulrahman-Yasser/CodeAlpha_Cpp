@@ -44,7 +44,7 @@ namespace CHRONO_WR_NS
                                                                 Chrono_Wrapper tp_2);
 
         template <typename T>
-        static std::chrono::time_point<std::chrono::system_clock> add_tp_with_dur(   
+        static Chrono_Wrapper add_tp_with_dur(   
                     std::chrono::time_point<std::chrono::system_clock> tp_1, 
                     T dur);
         

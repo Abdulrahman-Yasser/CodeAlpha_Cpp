@@ -10,6 +10,7 @@
 #include <iostream>
 #include <ctime>
 #include <iomanip>
+
 #include "../chrono_wrapper/chrono_wrapper.hpp"
 
 namespace TO_DO_ELEMENT_WR_NS
@@ -69,6 +70,7 @@ private:
     std::string                 name;
     std::chrono::minutes        execution_time;
     To_Do_state                 status = To_Do_state::waiting;
+    void reschedule_the_task(std::chrono::time_point<std::chrono::system_clock> tp);
     void change_end_time(void);
     void check_task_state(void);
     void change_nxt_time(void);

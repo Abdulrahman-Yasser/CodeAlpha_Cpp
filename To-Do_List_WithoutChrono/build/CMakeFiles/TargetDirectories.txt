@@ -1,3 +1,0 @@
-/home/abdu/Study/CodeAlpha_Cpp/To-Do_List_WithoutChrono/build/CMakeFiles/ToDo_list.dir
-/home/abdu/Study/CodeAlpha_Cpp/To-Do_List_WithoutChrono/build/CMakeFiles/edit_cache.dir
-/home/abdu/Study/CodeAlpha_Cpp/To-Do_List_WithoutChrono/build/CMakeFiles/rebuild_cache.dir

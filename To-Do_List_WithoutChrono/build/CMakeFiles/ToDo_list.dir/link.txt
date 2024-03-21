@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/ToDo_list.dir/DS/LinkedList.cpp.o "CMakeFiles/ToDo_list.dir/ToDo_Element/to-do_Element_.cpp.o" "CMakeFiles/ToDo_list.dir/ToDo_Element_with_wrapper/to-do_Element.cpp.o" "CMakeFiles/ToDo_list.dir/ToDo_Group/to-do_group.cpp.o" CMakeFiles/ToDo_list.dir/chrono_wrapper/chrono_wrapper.cpp.o CMakeFiles/ToDo_list.dir/main.cpp.o -o ToDo_list 
