@@ -2,7 +2,6 @@
 #include <fstream>
 #define KEY_LONG 5
 
-
 void secure_file::change_file(std::string the_file):file_path(the_file)
 {
 }
@@ -59,7 +58,6 @@ std::string secure_file::encrypt_file(std::string the_key){
         temp = (temp + int_keys[4]) % 6;
         fin.readsome( editing_those, temp );
         apply_the_algorithm(editing_those);
-
     }
 
 
