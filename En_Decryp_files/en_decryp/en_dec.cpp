@@ -2,102 +2,84 @@
 #include <fstream>
 #define KEY_LONG 5
 
-void secure_file::change_file(std::string the_file):file_path(the_file)
+
+
+secure_file::secure_file(std::string the_file):file_path(the_file)
 {
 }
 
-void secure_file::change_file(std::string the_file, std::string the_key):file_path(the_file), key(the_key)
+secure_file::secure_file(std::string the_file, std::string the_key):file_path(the_file), key(the_key)
 {
 }
 
 
-void secure_file::apply_the_algorithm(char* the_chars){
+void secure_file::change_file(std::string file){
+    file_path = file;
+}
 
-    std::fstream fin, fout;
-    int* int_keys;
-    char editing_those[6];
-    int temp = 0;
-
-    std::cout << "Please enter the key : ";
-    std::cin >> key;
-
-    int_keys = get_the_int_keys();
-
-    fin.open(file_path, std::fstream::in);
-    fout.open("encrypt.txt", std::fstream::out);
-
-
-    while(!fin.eof()){
-        temp = (temp + int_keys[4]) % 6;
-        fin.readsome( editing_those, temp );
-
-
-    }
-
-
+void secure_file::change_key(std::string key){
+    this->key = key;
 }
 
 
-std::string secure_file::encrypt_file(std::string the_key){
-    
-    std::fstream fin, fout;
-    int* int_keys;
-    char editing_those[6];
-    int temp = 0;
-
-    std::cout << "Please enter the key : ";
-    std::cin >> key;
-
-    int_keys = get_the_int_keys();
-
-    fin.open(file_path, std::fstream::in);
-    fout.open("encrypt.txt", std::fstream::out);
-
-
-    while(!fin.eof()){
-        temp = (temp + int_keys[4]) % 6;
-        fin.readsome( editing_those, temp );
-        apply_the_algorithm(editing_those);
-    }
-
-
-
-
-}
-
-int* secure_file::get_the_int_keys(void){
-    int i = 0, j = 0, temp = 0;
-    int* keys = new int[KEY_LONG];
-
-    while(key[i] != '\0' ){
-        if(key[i] == '-'){
-            if(j < KEY_LONG - 1){
-                keys[j] = temp;
-                j++;
-            }
-            temp = 0;
-        }else{
-            temp = (temp * 10) + (key[i] - '0');
-        }
-        i++;
-    }
-
-    keys[j] = temp;
-    return keys;
-}
 
 
 std::string secure_file::encrypt_file(){
+    std::ifstream my_key(key, std::ios::binary);
+    std::ifstream my_real_file(file_path);
+    std::ofstream the_encrypt_file(file_path+"enk.txt", std::ios::binary);
 
+    int i, z, limit, temp;
+    char dumb;
+
+    while(!my_real_file.eof()){
+        my_key >> z;
+        my_key >> dumb;
+        if(my_key.eof()){
+            my_key.clear();                 // clear fail and eof bits
+            my_key.seekg(0, std::ios::beg); // back to the start!
+            my_key >> z;
+            my_key >> dumb;
+        }
+        for(int i = 0; z > 0 && !my_real_file.eof(); i++){
+            std::cout << "Writing\n";
+            temp = z % 10;
+            z = z / 10;
+            the_encrypt_file << (my_real_file.get()+temp);
+            the_encrypt_file << ",";
+        }
+    }
+    std::cout << "wrote\n";
+    return (file_path+"enk.txt");
 }
 
-std::string secure_file::decrypt_file(std::string){
 
-}
 std::string secure_file::decrypt_file(){
+    std::ifstream my_key(key, std::ios::binary);
+    std::ifstream my_real_file(file_path+"enk.txt");
+    std::ofstream the_encrypt_file(file_path+"dek.txt", std::ios::binary);
 
-}
+    int i, z, temp_2, temp;
+    char dumb, dumb_2;
 
-void secure_file::take_key(std::string ){
-
+    while(!my_real_file.eof()){
+        my_key >> z;
+        my_key >> dumb;
+        if(my_key.eof()){
+            my_key.clear();                 // clear fail and eof bits
+            my_key.seekg(0, std::ios::beg); // back to the start!
+            my_key >> z;
+            my_key >> dumb;
+        }
+        for(int i = 0; z > 0 && !my_real_file.eof(); i++){
+            std::cout << "Writing\n";
+            my_real_file >> temp_2;
+            my_real_file >> dumb_2;
+            temp = z % 10;
+            z = z / 10;
+            the_encrypt_file << (char)abs(temp-temp_2);
+        }
+    }
+    std::cout << "wrote\n";
+    return (file_path+"enk.txt");
 }
